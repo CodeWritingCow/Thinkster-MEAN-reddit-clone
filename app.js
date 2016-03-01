@@ -18,8 +18,13 @@ app.controller('MainCtrl', [
 			// prevent users from submitting posts with blank title
 			if (!$scope.title || $scope.title === '') { return; }
 
-			$scope.posts.push({title: $scope.title, upvotes: 0});
+			$scope.posts.push({
+				title: $scope.title,
+				link: $scope.link,
+				upvotes: 0
+			});
 			$scope.title = '';
+			$scope.link = '';
 		};
 
 		// adds an upvote

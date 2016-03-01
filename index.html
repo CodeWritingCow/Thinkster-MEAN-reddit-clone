@@ -9,10 +9,15 @@
 <body ng-app="flapperNews" ng-controller="MainCtrl">
 
 	<button ng-click="addPost()">Post</button>
-	
+
 	<div ng-repeat="post in posts | orderBy: '-upvotes'">
 		{{post.title}} - upvotes: {{post.upvotes}}
 	</div>
+
+	<form ng-submit="addPost()">
+		<input type="text" ng-model="title"></input>
+		<button type="submit">Post</button>
+	</form>
 
 </body>
 </html>

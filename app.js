@@ -14,6 +14,11 @@ app.controller('MainCtrl', [
 
 		// function that adds object into posts array
 		$scope.addPost = function() {
-			$scope.posts.push({title: 'A new post!', upvotes: 0});
+
+			// prevent users from submitting posts with blank title
+			if (!$scope.title || $scope.title === '') { return; }
+
+			$scope.posts.push({title: $scope.title, upvotes: 0});
+			$scope.title = '';
 		};
 }]);

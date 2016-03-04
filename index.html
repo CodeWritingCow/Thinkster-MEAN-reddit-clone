@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>	
 	<style type="text/css"> .glyphicon-thumbs-up { cursor: pointer; }</style>
 
@@ -13,6 +14,7 @@
 <body ng-app="flapperNews" ng-controller="MainCtrl">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
+			<ui-view></ui-view>
 
 			<div class="page-header">
 				<h1>Flapper News</h1>
@@ -45,5 +47,47 @@
 
 		</div>
 	</div>
+
+	<script type="text/ng-template" id="/home.html">
+		<div class="page-header">
+			<h1>Flapper News</h1>
+			<span>
+				<a href="#/posts/{{$index}}">Comments</a>
+			</span>
+		</div>
+
+		<!-- rest of template -->
+	</script>
+
+	<script type="text/ng-template" id="/posts.html">
+		<div class="page-header">
+			<h3>
+				<a ng-show="post.link" href="{{post.link}}">
+					{{post.title}}
+				</a>
+				<span ng-hide="post.link">
+					{{post.title}}
+				</span>
+			</h3>
+		</div>
+
+		<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+			{{comment.upvotes}} - by {{comment.author}}
+			<span style="font-size: 20px; margin.left: 10px;">
+				{{comment.body}}
+			</span>
+		</div>
+
+		<form ng-submit="addComment()" style="margin-top: 30px">
+			<h3>Add a new comment</h3>
+
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
+			</div>
+			<button type="submit" class="btn btn-primary">Post</button>
+		</form>
+	</script>
+
 </body>
 </html>

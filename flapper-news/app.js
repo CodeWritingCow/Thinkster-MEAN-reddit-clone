@@ -1,3 +1,13 @@
+var mongoose = require('mongoose');
+
+// Register Mongoose data models
+require('./models/Posts');
+require('./models/Comments');
+
+// Conect to local MongoDB instance
+mongoose.connect('mongodb://localhost/news');
+
+
 var express = require('express'),
     path = require('path'),
     favicon = require('serve-favicon'),
@@ -9,15 +19,6 @@ var routes = require('./routes/index'),
     users = require('./routes/users');
 
 var app = express();
-
-var mongoose = require('mongoose');
-
-// Register Mongoose data models
-require('./models/Posts');
-require('./models/Comments');
-
-// Conect to local MongoDB instance
-mongoose.connect('mongodb://localhost/news');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

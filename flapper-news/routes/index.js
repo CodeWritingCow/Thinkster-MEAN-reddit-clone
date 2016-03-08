@@ -44,12 +44,29 @@ router.param('post', function(req, res, next, id) {
 	});
 });
 
-/* GET single post */
-router.get('/posts/:post', function(req, res) {
-	res.json(req.post);
+/* Route for preloading comments */
+router.param('comment', function(req, res, next, id) {
+	var query = Comment.findById(id);
+
+	query.exec(function(err, comment) {
+		if (err) { return next(err); }
+		if (!comment) { return next(new Error('can\'t find comment')); }
+
+		req.comment = comment;
+		return next();
+	});
 });
 
-/* PUT route for updating upvotes */
+/* GET route for retrieving single posts */
+router.get('/posts/:post', function(req, res, next) {
+	req.post.populate('comments', function(err, post) {
+		if (err) { return next(err); }
+
+		res.json(post);
+	});
+});
+
+/* PUT route for updating upvotes on single posts */
 router.put('/posts/:post/upvote', function(req, res, next) {
 	req.post.upvote(function(err, post) {
 		if (err) { return next(err); }
@@ -75,5 +92,13 @@ router.post('/posts/:post/comments', function(req, res, next) {
 	});
 });
 
+/* PUT route for updating upvotes on single comments  */
+router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
+	req.comment.upvote(function(err, comment) {
+		if (err) { return next(err); }
+
+		res.json(comment);
+	});
+});
 
 module.exports = router;

@@ -9,7 +9,12 @@ app.config([
 			.state('home', {
 				url: '/home',
 				templateUrl: '/home.html',
-				controller: 'MainCtrl'
+				controller: 'MainCtrl',
+				resolve: {
+					postPromise: ['posts', function(posts) {
+						return posts.getAll();
+					}]
+				}
 			})
 			.state('posts', {
 				url: '/posts/{id}',
@@ -20,7 +25,7 @@ app.config([
 		$urlRouterProvider.otherwise('home');
 }]);
 
-app.factory('posts', ['$http' , function($http){
+app.factory('posts', ['$http', function($http){
 	var o = {
 		posts: []
 	};
@@ -31,18 +36,18 @@ app.factory('posts', ['$http' , function($http){
 		});
 	};
 
+	o.create = function(post) {
+		return $http.post('/posts', post).success(function(data) {
+			o.posts.push(data);
+		});
+	};
+
 	return o;
+
 }]);
 
 app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 		$scope.posts = posts.posts;
-		$scope.posts = [
-			{title: 'post 1', upvotes: 4},
-			{title: 'post 2', upvotes: 25},
-			{title: 'post 3', upvotes: 14},
-			{title: 'post 4', upvotes: 8},
-			{title: 'post 5', upvotes: 5}
-		];
 
 		// function that adds object into posts array
 		$scope.addPost = function() {
@@ -50,14 +55,9 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 			// prevent users from submitting posts with blank title
 			if (!$scope.title || $scope.title === '') { return; }
 
-			$scope.posts.push({
+			posts.create({
 				title: $scope.title,
-				link: $scope.link,
-				upvotes: 0,
-				comments: [
-					{author: 'Joe', body: 'Cool post!', upvotes: 0},
-					{author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}					
-				]
+				link: $scope.link
 			});
 			$scope.title = '';
 			$scope.link = '';

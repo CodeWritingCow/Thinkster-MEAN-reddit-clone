@@ -1,8 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    passport = require('passport');
 
 // Register Mongoose data models
 require('./models/Posts');
 require('./models/Comments');
+require('./models/Users');
+require('./config/passport');
 
 // Conect to local MongoDB instance
 mongoose.connect('mongodb://localhost/news');
@@ -31,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);

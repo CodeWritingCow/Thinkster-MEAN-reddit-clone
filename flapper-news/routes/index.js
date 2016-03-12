@@ -1,10 +1,15 @@
 var express = require('express'),
 	router = express.Router(),
 	mongoose = require('mongoose'),
-	Post = mongoose.model('Post'),
-	Comment = mongoose.model('Comment'),
 	passport = require('passport'),
+	jwt = require('express-jwt');
+
+var Post = mongoose.model('Post'),
+	Comment = mongoose.model('Comment'),
 	User = mongoose.model('User');
+
+/* Middleware for authenticating JWT tokens */
+var auth = jwt({ secret: 'SECRET', userProperty: 'payload' });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

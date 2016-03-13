@@ -27,7 +27,7 @@ router.get('/posts', function(req, res, next) {
 });
 
 /* POST Flapper News posts*/
-router.post('/posts', function(req, res, next) {
+router.post('/posts', auth, function(req, res, next) {
 	var post = new Post(req.body);
 
 	post.save(function(err, post) {
@@ -74,7 +74,7 @@ router.get('/posts/:post', function(req, res, next) {
 });
 
 /* PUT route for updating upvotes on single posts */
-router.put('/posts/:post/upvote', function(req, res, next) {
+router.put('/posts/:post/upvote', auth, function(req, res, next) {
 	req.post.upvote(function(err, post) {
 		if (err) { return next(err); }
 
@@ -83,7 +83,7 @@ router.put('/posts/:post/upvote', function(req, res, next) {
 });
 
 /* POST route for posting comments */
-router.post('/posts/:post/comments', function(req, res, next) {
+router.post('/posts/:post/comments', auth, function(req, res, next) {
 	var comment = new Comment(req.body);
 	comment.post = req.post;
 
@@ -100,7 +100,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 /* PUT route for updating upvotes on single comments  */
-router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
+router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, next) {
 	req.comment.upvote(function(err, comment) {
 		if (err) { return next(err); }
 

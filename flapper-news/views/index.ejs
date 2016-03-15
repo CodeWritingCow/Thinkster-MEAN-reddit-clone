@@ -43,6 +43,9 @@
 				<span ng-hide="post.link">
 					{{post.title}}
 				</span>
+				<span ng-show="post.author">
+					posted by <a>{{post.author}}</a> |
+				</span>
 				<span>
 					<a href="#/posts/{{post._id}}">Comments</a>
 				</span>

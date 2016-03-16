@@ -17,7 +17,7 @@ gulp.task('css', function() {
 // task for linting js files
 gulp.task('js', function() {
 	
-	return gulp.src(['public/assets/js/*.js'])
+	return gulp.src(['public/assets/js/*.js', 'public/app/*.js', 'public/app/**/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });

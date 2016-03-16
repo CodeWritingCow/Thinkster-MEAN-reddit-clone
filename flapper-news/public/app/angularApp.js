@@ -1,4 +1,4 @@
-var app = angular.module('flapperNews', ['ui.router', 'navCtrl']);
+var app = angular.module('flapperNews', ['ui.router', 'navCtrl', 'authCtrl', 'postsCtrl', 'mainCtrl']);
 
 app.config([
 	'$stateProvider',
@@ -9,7 +9,7 @@ app.config([
 			.state('home', {
 				url: '/home',
 				templateUrl: '/home.html',
-				controller: 'MainCtrl',
+				controller: 'mainController',
 				resolve: {
 					postPromise: ['posts', function(posts) {
 						return posts.getAll();
@@ -19,7 +19,7 @@ app.config([
 			.state('posts', {
 				url: '/posts/{id}',
 				templateUrl: '/posts.html',
-				controller: 'PostsCtrl',
+				controller: 'postsController',
 				resolve: {
 					post: ['$stateParams', 'posts', function($stateParams, posts) {
 						return posts.get($stateParams.id);
@@ -29,7 +29,7 @@ app.config([
 			.state('login', {
 				url: '/login',
 				templateUrl: '/login.html',
-				controller: 'AuthCtrl',
+				controller: 'authController',
 				onEnter: ['$state', 'auth', function($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');
@@ -39,7 +39,7 @@ app.config([
 			.state('register', {
 				url: '/register',
 				templateUrl: '/register.html',
-				controller: 'AuthCtrl',
+				controller: 'authController',
 				onEnter: ['$state', 'auth', function($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');
@@ -152,70 +152,4 @@ app.factory('posts', ['$http', 'auth', function($http, auth){
 
 	return o;
 
-}]);
-
-app.controller('MainCtrl', ['$scope', 'posts', 'auth', function($scope, posts, auth){
-		$scope.posts = posts.posts;
-		$scope.isLoggedIn = auth.isLoggedIn;
-
-		// function that adds object into posts array
-		$scope.addPost = function() {
-
-			// prevent users from submitting posts with blank title
-			if (!$scope.title || $scope.title === '') { return; }
-
-			posts.create({
-				title: $scope.title,
-				link: $scope.link
-			});
-			$scope.title = '';
-			$scope.link = '';
-		};
-
-		// adds an upvote
-		$scope.incrementUpvotes = function(post) {
-			posts.upvote(post);
-		};
-	}
-]);
-
-app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth', function($scope, posts, post, auth){
-		$scope.post = post;
-		$scope.isLoggedIn = auth.isLoggedIn;
-
-		$scope.addComment = function() {
-			if ($scope.body === '') {return; }
-			posts.addComment(post._id, {
-				body: $scope.body,
-				author: 'user',
-				upvotes: 0
-			}).success(function(comment) {
-				$scope.post.comments.push(comment);
-			});
-			$scope.body = '';
-		};
-
-		$scope.incrementUpvotes = function(comment) {
-			posts.upvoteComment(post, comment);
-		};
-}]);
-
-app.controller('AuthCtrl', ['$scope', '$state', 'auth', function($scope, $state, auth){
-	$scope.user = {};
-
-	$scope.register = function() {
-		auth.register($scope.user).error(function(error) {
-			$scope.error = error;
-		}).then(function() {
-			$state.go('home');
-		});
-	};
-
-	$scope.logIn = function() {
-		auth.logIn($scope.user).error(function(error) {
-			$scope.error = error;
-		}).then(function() {
-			$state.go('home');
-		});
-	};
 }]);

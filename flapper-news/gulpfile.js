@@ -21,3 +21,10 @@ gulp.task('js', function() {
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });
+
+// task for minifying images
+gulp.task('img', function() {
+	return gulp.src('public/assets/img/**/*.+(jpg|png|gif|svg)')
+		.pipe(imagemin())
+		.pipe(gulp.dest('public/assets/img'));
+});

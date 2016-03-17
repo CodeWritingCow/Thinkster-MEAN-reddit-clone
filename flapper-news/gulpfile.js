@@ -2,7 +2,8 @@
 var gulp = require('gulp'),
 	minifyCSS = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
-	jshint = require('gulp-jshint');
+	jshint = require('gulp-jshint'),
+	imagemin = require('gulp-imagemin');
 
 // define task called css
 gulp.task('css', function() {
@@ -26,5 +27,6 @@ gulp.task('js', function() {
 gulp.task('img', function() {
 	return gulp.src('public/assets/img/**/*.+(jpg|png|gif|svg)')
 		.pipe(imagemin())
+		.pipe(rename({ suffix: '-min' }))
 		.pipe(gulp.dest('public/assets/img'));
 });

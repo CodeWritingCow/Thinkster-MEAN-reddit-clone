@@ -1,6 +1,9 @@
 var mongoose = require('mongoose'),
 	crypto = require('crypto'),
-	jwt = require('jsonwebtoken');
+	jwt = require('jsonwebtoken'),
+	config = require('../config');
+
+var superSecret = config.secret;
 
 var UserSchema = new mongoose.Schema({
 	username: {type: String, lowercase: true, unique: true},
@@ -29,7 +32,7 @@ UserSchema.methods.generateJWT = function() {
 		_id: this._id,
 		username: this.username,
 		exp: parseInt(exp.getTime() / 1000),
-	}, 'SECRET');
+	}, superSecret);
 };
 
 mongoose.model('User', UserSchema);

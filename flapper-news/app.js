@@ -7,16 +7,16 @@ require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
 
-// Conect to local MongoDB instance
-mongoose.connect('mongodb://localhost/news');
-
-
 var express = require('express'),
     path = require('path'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    config = require('./config');
+
+// Conect to local MongoDB instance
+mongoose.connect(config.database);
 
 var routes = require('./routes/index'),
     users = require('./routes/users');

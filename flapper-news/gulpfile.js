@@ -9,10 +9,10 @@ var gulp = require('gulp'),
 gulp.task('css', function() {
 
 	// grab css file, minify it, save to style.min.css
-	return gulp.src('public/assets/css/style.css')
+	return gulp.src('public/assets/css/*.css')
 		.pipe(minifyCSS())
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest('public/assets/css'));
+		.pipe(gulp.dest('public/dist/css'));
 });
 
 // task for linting js files
@@ -28,5 +28,5 @@ gulp.task('img', function() {
 	return gulp.src('public/assets/img/**/*.+(jpg|png|gif|svg)')
 		.pipe(imagemin())
 		.pipe(rename({ suffix: '-min' }))
-		.pipe(gulp.dest('public/assets/img'));
+		.pipe(gulp.dest('public/dist/img'));
 });

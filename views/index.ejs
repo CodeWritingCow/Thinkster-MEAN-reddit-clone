@@ -2,10 +2,11 @@
 <html>
 <head>
 	<title>Flapper News</title>
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+	<script type="text/javascript" src="assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 
 	<script type="text/javascript" src="/app/angularApp.js"></script>
 	<script type="text/javascript" src="/app/app.states.js"></script>
@@ -61,7 +62,7 @@
 			</span>
 		</div>
 
-		<form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top: 30px;">
+		<form ng-submit="addPost()" ng-show="isLoggedIn()">
 			<h3>Add a new post</h3>
 
 			<div class="form-group">
@@ -99,7 +100,7 @@
 			</span>
 		</div>
 
-		<form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top: 30px">
+		<form ng-submit="addComment()" ng-show="isLoggedIn()">
 			<h3>Add a new comment</h3>
 
 			<div class="form-group">
@@ -122,7 +123,7 @@
 			<span>{{ error.message }}</span>
 		</div>
 
-		<form ng-submit="register()" style="margin-top: 30px;">
+		<form ng-submit="register()">
 			<h3>Register</h3>
 
 			<div class="form-group">
@@ -145,7 +146,7 @@
 			<row>{{ error.message }}</row>
 		</div>
 
-		<form ng-submit="logIn()" style="margin-top: 30px;">
+		<form ng-submit="logIn()">
 			<h3>Log In</h3>
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>

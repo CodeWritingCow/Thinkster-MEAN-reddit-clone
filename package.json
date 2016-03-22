@@ -1,6 +1,9 @@
 {
   "name": "flapper-news",
   "version": "0.0.0",
+  "engines": {
+    "node": "5.7.1"
+    },
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"

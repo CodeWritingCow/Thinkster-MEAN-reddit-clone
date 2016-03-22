@@ -18,7 +18,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     config = require('./config');
 
-// Conect to local MongoDB instance
+// Conect to MongoDB instance
 mongoose.connect(config.database);
 
 var routes = require('./routes/index'),

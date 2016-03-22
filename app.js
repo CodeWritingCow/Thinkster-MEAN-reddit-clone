@@ -1,5 +1,6 @@
 // Load environmental variables
-require('dotenv').config();
+var dotenv = require('dotenv');
+dotenv.config();
 
 var mongoose = require('mongoose'),
     passport = require('passport');

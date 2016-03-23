@@ -1,9 +1,9 @@
 var mongoose = require('mongoose'),
 	crypto = require('crypto'),
 	jwt = require('jsonwebtoken'),
-	config = require('../config');
+	configfile = require('../configfile');
 
-var superSecret = config.secret;
+var superSecret = configfile.secret;
 
 var UserSchema = new mongoose.Schema({
 	username: {type: String, lowercase: true, unique: true},

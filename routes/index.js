@@ -3,10 +3,10 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	jwt = require('express-jwt'),
-	config = require('../config');
+	configfile = require('../configfile');
 
 // super secret
-var superSecret = config.secret;
+var superSecret = configfile.secret;
 
 var Post = mongoose.model('Post'),
 	Comment = mongoose.model('Comment'),

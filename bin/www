@@ -7,13 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('flapper-news:server');
 var http = require('http');
-var config = require('../config');
+var configfile = require('../configfile');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(config.port);
+var port = normalizePort(configfile.port);
 app.set('port', port);
 
 /**

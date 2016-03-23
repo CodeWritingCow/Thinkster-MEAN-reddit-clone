@@ -17,10 +17,10 @@ var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    config = require('./config');
+    configfile = require('./configfile');
 
 // Conect to MongoDB instance
-mongoose.connect(config.database);
+mongoose.connect(configfile.database);
 
 var routes = require('./routes/index'),
     users = require('./routes/users');

@@ -6,10 +6,10 @@ var mongoose = require('mongoose'),
     passport = require('passport');
 
 // Register Mongoose data models
-require('./models/Posts');
-require('./models/Comments');
-require('./models/Users');
-require('./config/passport');
+var modelsPosts = require('./models/Posts'),
+    modelsComments = require('./models/Comments'),
+    modelsUsers = require('./models/Users'),
+    modelsPassport = require('./config/passport');
 
 var express = require('express'),
     path = require('path'),

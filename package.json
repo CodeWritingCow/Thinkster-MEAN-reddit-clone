@@ -2,7 +2,8 @@
   "name": "flapper-news",
   "version": "0.0.0",
   "engines": {
-    "node": "5.7.1"
+    "node": "5.7.1",
+    "npm": "3.8.2"
   },
   "private": true,
   "scripts": {

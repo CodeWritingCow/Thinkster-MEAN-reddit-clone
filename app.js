@@ -1,6 +1,6 @@
 // Load environmental variables
 var dotenv = require('dotenv');
-dotenv.config();
+    dotenv.config({silent:true}); // turns off warning if missing .env file
 
 var mongoose = require('mongoose'),
     passport = require('passport');

@@ -1,6 +1,7 @@
 {
   "name": "flapper-news",
   "version": "0.0.0",
+  "description": "A Reddit clone made with the MEAN stack",
   "engines": {
     "node": "5.7.1",
     "npm": "3.8.2"

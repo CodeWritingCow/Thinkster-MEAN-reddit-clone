@@ -22,5 +22,10 @@ angular.module('mainCtrl', [])
 		$scope.incrementUpvotes = function(post) {
 			posts.upvote(post);
 		};
+
+		// adds a downvote
+		$scope.incrementDownvotes = function(post) {
+			posts.downvote(post);
+		};
 	}
 ]);

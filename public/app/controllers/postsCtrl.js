@@ -9,7 +9,8 @@ angular.module('postsCtrl', [])
 			posts.addComment(post._id, {
 				body: $scope.body,
 				author: 'user',
-				upvotes: 0
+				upvotes: 0,
+				downvotes: 0,
 			}).success(function(comment) {
 				$scope.post.comments.push(comment);
 			});
@@ -18,5 +19,9 @@ angular.module('postsCtrl', [])
 
 		$scope.incrementUpvotes = function(comment) {
 			posts.upvoteComment(post, comment);
+		};
+
+		$scope.incrementDownvotes = function(comment) {
+			posts.downvoteComment(post, comment);
 		};
 }]);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Flapper News</title>
+	<title>CodeWritingCow News</title>
 	<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -40,7 +40,7 @@
 
 	<script type="text/ng-template" id="/home.html">
 		<div class="page-header">
-			<h1>Flapper News</h1>
+			<h1>CodeWritingCow News</h1>
 		</div>
 
 		<div ng-repeat="post in posts | orderBy: '-upvotes'">
@@ -55,12 +55,17 @@
 				<span ng-hide="post.link">
 					{{post.title}}
 				</span>
-				<span ng-show="post.author">
-					posted by <a>{{post.author}}</a> | 
-				</span>
-				<span>
-					<a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
-				</span>
+				<small>
+					<span ng-show="post.author">
+						posted by <a>{{post.author}}</a>
+					</span>
+					<span ng-show="post.date">
+						at {{post.date | date:"MMMM d, y 'at' h:mma"}}  | 
+					</span>
+					<span>
+						<a href="#/posts/{{post._id}}">{{post.comments.length}} comments</a>
+					</span>
+				</small>
 			</span>
 		</div>
 
@@ -100,8 +105,9 @@
 			<span class="glyphicon glyphicon-thumbs-down" ng-click="incrementDownvotes(comment)"></span>
 			{{comment.downvotes}}
 			<span style="font-size: 20px; margin.left: 10px;">
-				{{comment.body}} - by {{comment.author}}
+				{{comment.body}}
 			</span>
+			<small><em><span>{{comment.author}} <span ng-show="post.date">&#8212; {{post.date | date:"MMMM d, y 'at' h:mma"}}</span></em></small></span>
 		</div>
 
 		<form ng-submit="addComment()" ng-show="isLoggedIn()">
@@ -120,7 +126,7 @@
 
 	<script type="text/ng-template" id="/register.html">
 		<div class="page-header">
-			<h1>Flapper News</h1>
+			<h1>CodeWritingCow News</h1>
 		</div>
 
 		<div ng-show="error" class="alert alert-danger row">
@@ -143,7 +149,7 @@
 
 	<script type="text/ng-template" id="/login.html">
 		<div class="page-header">
-			<h1>Flapper News</h1>
+			<h1>CodeWritingCow News</h1>
 		</div>
 	
 		<div ng-show="error" class="alert alert-danger row">

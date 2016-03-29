@@ -12,7 +12,8 @@ angular.module('mainCtrl', [])
 
 			posts.create({
 				title: $scope.title,
-				link: $scope.link
+				link: $scope.link,
+				date: Date.now()
 			});
 			$scope.title = '';
 			$scope.link = '';

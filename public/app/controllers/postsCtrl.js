@@ -9,6 +9,7 @@ angular.module('postsCtrl', [])
 			posts.addComment(post._id, {
 				body: $scope.body,
 				author: 'user',
+				date: Date.now(),
 				upvotes: 0,
 				downvotes: 0,
 			}).success(function(comment) {

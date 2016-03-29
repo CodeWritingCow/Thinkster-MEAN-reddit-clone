@@ -25,10 +25,10 @@
 	<nav class="navbar navbar-default pull-right" ng-controller="navController">
 
 		<ul class="nav navbar-nav">
-			<li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
-			<li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
-			<li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
-			<li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+			<li ng-show="isLoggedIn()"><a><span class="glyphicon glyphicon-user"></span> {{ currentUser() }}</a></li>
+			<li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+			<li ng-hide="isLoggedIn()"><a href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+			<li ng-hide="isLoggedIn()"><a href="/#/register"><span class="glyphicon glyphicon-flash"></span> Register</a></li>
 		</ul>
 	</nav>
 	
@@ -60,10 +60,10 @@
 						posted by <a>{{post.author}}</a>
 					</span>
 					<span ng-show="post.date">
-						at {{post.date | date:"MMMM d, y 'at' h:mma"}}  | 
+						on {{post.date | date:"MMMM d, y 'at' h:mma"}}  | 
 					</span>
 					<span>
-						<a href="#/posts/{{post._id}}">{{post.comments.length}} comments</a>
+						<a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span> {{post.comments.length}} comments</a>
 					</span>
 				</small>
 			</span>

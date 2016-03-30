@@ -1,0 +1,34 @@
+<div class="page-header">
+	<h3>
+		<a ng-show="post.link" href="{{post.link}}">
+			{{post.title}}
+		</a>
+		<span ng-hide="post.link">
+			{{post.title}}
+		</span>
+	</h3>
+</div>
+
+<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+	<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+	{{comment.upvotes}} | 
+	<span class="glyphicon glyphicon-thumbs-down" ng-click="incrementDownvotes(comment)"></span>
+	{{comment.downvotes}}
+	<span style="font-size: 20px; margin.left: 10px;">
+		{{comment.body}}
+	</span>
+	<small><em><span>{{comment.author}} <span ng-show="post.date">&#8212; {{post.date | date:"MMMM d, y 'at' h:mma"}}</span></em></small></span>
+</div>
+
+<form ng-submit="addComment()" ng-show="isLoggedIn()">
+	<h3>Add a new comment</h3>
+
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
+	</div>
+	<button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+<div ng-hide="isLoggedIn()">
+	<h3>You must <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
+</div>

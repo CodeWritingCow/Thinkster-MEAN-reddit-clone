@@ -5,7 +5,7 @@ angular.module('app.states', [])
 		$stateProvider
 			.state('home', {
 				url: '/home',
-				templateUrl: '/home.html',
+				templateUrl: 'app/views/home.html',
 				controller: 'mainController',
 				resolve: {
 					postPromise: ['posts', function(posts) {
@@ -15,7 +15,7 @@ angular.module('app.states', [])
 			})
 			.state('posts', {
 				url: '/posts/{id}',
-				templateUrl: '/posts.html',
+				templateUrl: 'app/views/posts.html',
 				controller: 'postsController',
 				resolve: {
 					post: ['$stateParams', 'posts', function($stateParams, posts) {
@@ -25,7 +25,7 @@ angular.module('app.states', [])
 			})
 			.state('login', {
 				url: '/login',
-				templateUrl: '/login.html',
+				templateUrl: 'app/views/login.html',
 				controller: 'authController',
 				onEnter: ['$state', 'auth', function($state, auth) {
 					if (auth.isLoggedIn()) {
@@ -35,7 +35,7 @@ angular.module('app.states', [])
 			})
 			.state('register', {
 				url: '/register',
-				templateUrl: '/register.html',
+				templateUrl: 'app/views/register.html',
 				controller: 'authController',
 				onEnter: ['$state', 'auth', function($state, auth) {
 					if (auth.isLoggedIn()) {

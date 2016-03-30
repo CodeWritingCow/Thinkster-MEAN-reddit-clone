@@ -56,12 +56,14 @@
 					{{post.title}}
 				</span>
 				<small>
+				<em>
 					<span ng-show="post.author">
 						posted by <a>{{post.author}}</a>
 					</span>
 					<span ng-show="post.date">
 						on {{post.date | date:"MMMM d, y 'at' h:mma"}}  | 
 					</span>
+				</em>
 					<span>
 						<a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span> {{post.comments.length}} comments</a>
 					</span>

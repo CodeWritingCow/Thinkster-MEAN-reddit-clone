@@ -2,11 +2,12 @@
 	<h1>CodeWritingCow News</h1>
 </div>
 
-<div ng-repeat="post in posts | orderBy: '-upvotes'">
+<div ng-repeat="post in posts | orderBy: '-upvotes'" ng-class-odd="'odd-rows'" ng-class-even="'even-rows'">
 	<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
 		{{post.upvotes}} |
 	<span class="glyphicon glyphicon-thumbs-down" ng-click="incrementDownvotes(post)"></span>
 		{{post.downvotes}}
+
 	<span style="font-size:20px; margin-left: 10px">
 		<a ng-show="post.link" href="{{post.link}}">
 			{{post.title}}
@@ -14,20 +15,25 @@
 		<span ng-hide="post.link">
 			{{post.title}}
 		</span>
-		<small>
+		
+		<span style="margin-left: 10px">
+			<small>
+			<a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span> {{post.comments.length}} comments</a>
+			</small>
+		</span>
+
+		<div style="font-size:small;">
 		<em>
 			<span ng-show="post.author">
-				posted by <a>{{post.author}}</a>
+				<a>{{post.author}}</a>
 			</span>
 			<span ng-show="post.date">
-				on {{post.date | date:"MMMM d, y 'at' h:mma"}}  | 
+				&#8212; {{post.date | date:"MMMM d, y 'at' h:mma"}}
 			</span>
 		</em>
-			<span>
-				<a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span> {{post.comments.length}} comments</a>
-			</span>
-		</small>
+		</div>
 	</span>
+
 </div>
 
 <form ng-submit="addPost()" ng-show="isLoggedIn()">

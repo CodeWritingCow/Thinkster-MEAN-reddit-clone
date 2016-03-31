@@ -1,4 +1,17 @@
+.glyphicon-thumbs-up, .glyphicon-thumbs-down {
+	cursor: pointer;
+}
+
 form {
 	margin-top: 30px;
 	margin-bottom: 30px;
+}
+
+.odd-rows {
+	background: #f7f7f7;
+	padding: 10px;
+}
+
+.even-rows {
+	padding: 10px;
 }

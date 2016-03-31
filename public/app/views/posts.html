@@ -9,7 +9,7 @@
 	</h3>
 </div>
 
-<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+<div ng-repeat="comment in post.comments | orderBy:'-upvotes'" ng-class-odd="'odd-rows'" ng-class-even="'even-rows'">
 	<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
 	{{comment.upvotes}} | 
 	<span class="glyphicon glyphicon-thumbs-down" ng-click="incrementDownvotes(comment)"></span>
@@ -17,7 +17,12 @@
 	<span style="font-size: 20px; margin.left: 10px;">
 		{{comment.body}}
 	</span>
-	<small><em><span>{{comment.author}} <span ng-show="post.date">&#8212; {{post.date | date:"MMMM d, y 'at' h:mma"}}</span></em></small></span>
+	
+	<div>
+		<small><em>{{comment.author}}
+			<span ng-show="post.date">&#8212; {{post.date | date:"MMMM d, y 'at' h:mma"}}</span>
+		</em></small>
+	</div>
 </div>
 
 <form ng-submit="addComment()" ng-show="isLoggedIn()">
